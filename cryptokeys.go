@@ -37,6 +37,17 @@ func (c *CryptokeysService) List(domain string) ([]Cryptokey, error) {
 	return cryptokeys, err
 }
 
+// Add creates a certain Cryptokey instance in a given Zone
+func (c *CryptokeysService) Add(domain string, cryptokey *Cryptokey) (*Cryptokey, error) {
+	req, err := c.client.newRequest("POST", fmt.Sprintf("servers/%s/zones/%s/cryptokeys/%s", c.client.VHost, trimDomain(domain), cryptokey), nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = c.client.do(req, &cryptokey)
+	return cryptokey, err
+}
+
 // Get returns a certain Cryptokey instance of a given Zone
 func (c *CryptokeysService) Get(domain string, id uint64) (*Cryptokey, error) {
 	req, err := c.client.newRequest("GET", fmt.Sprintf("servers/%s/zones/%s/cryptokeys/%s", c.client.VHost, trimDomain(domain), cryptokeyIDToString(id)), nil, nil)
