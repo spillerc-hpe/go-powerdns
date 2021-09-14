@@ -41,6 +41,18 @@ func (t *TSIGKeysService) Add(TSIGKey *TSIGKey) (*TSIGKey, error) {
 	return TSIGKey, err
 }
 
+// Replace replaces a certain TSIGKey instance
+func (t *TSIGKeysService) Replace(TSIGKey *TSIGKey) (*TSIGKey, error) {
+	req, err := t.client.newRequest("PUT",
+		fmt.Sprintf("servers/%s/tsigkeys/%s", t.client.VHost, *TSIGKey.ID), nil, TSIGKey)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = t.client.do(req, &TSIGKey)
+	return TSIGKey, err
+}
+
 // Get returns a certain TSIGKey instance
 func (t *TSIGKeysService) Get(id string) (*TSIGKey, error) {
 	req, err := t.client.newRequest("GET",
