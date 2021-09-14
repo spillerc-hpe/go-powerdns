@@ -10,7 +10,7 @@ type TSIGKeysService service
 // TSIGKey structure with JSON API metadata
 type TSIGKey struct {
 	Name      *string `json:"name,omitempty"`
-	ID        *uint64 `json:"id,omitempty"`
+	ID        *string `json:"id,omitempty"`
 	Algorithm *string `json:"algorithm,omitempty"`
 	Key       *string `json:"key,omitempty"`
 	Type      *string `json:"type,omitempty"`
