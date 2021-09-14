@@ -42,9 +42,9 @@ func (t *TSIGKeysService) Add(TSIGKey *TSIGKey) (*TSIGKey, error) {
 }
 
 // Replace replaces a certain TSIGKey instance
-func (t *TSIGKeysService) Replace(TSIGKey *TSIGKey) (*TSIGKey, error) {
+func (t *TSIGKeysService) Replace(id string, TSIGKey *TSIGKey) (*TSIGKey, error) {
 	req, err := t.client.newRequest("PUT",
-		fmt.Sprintf("servers/%s/tsigkeys/%s", t.client.VHost, *TSIGKey.ID), nil, TSIGKey)
+		fmt.Sprintf("servers/%s/tsigkeys/%s", t.client.VHost, id), nil, TSIGKey)
 	if err != nil {
 		return nil, err
 	}
